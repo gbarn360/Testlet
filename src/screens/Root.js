@@ -14,9 +14,9 @@ export default function Root() {
         <div className="" >
             <NavBar />
             <div className="w-auto mb-40">
-                <img className=" hidden lg:block z-0" src="../pictures/homepic2.jpg" />
+                <img className=" hidden lg:block z-0" src="../pictures/rootbg2.jpeg" />
                 <div className="lg:w-1/2 xl:w-1/3 lg:h-1/2  lg:absolute lg:z-10 lg:top-1/4 lg:left-20 flex flex-col lg:items-start 2xl:w-1/3 2xl:items-center items-center">
-                    <h1 className="text-5xl md:text-5xl font-bold lg:text-slate-100 text-center mt-10 ml-2 mr-2 lg:mt-0 lg:ml-0 lg:mr-0  2xl:text-7xl text-slate-800 drop-shadow-lg">Discover the best way to study</h1>
+                    <h1 className="text-5xl md:text-5xl font-bold lg:text-slate-100 text-center mt-10 ml-2 mr-2 lg:mt-0 lg:ml-0 lg:mr-0  2xl:text-7xl text-slate-800 drop-shadow-md">Discover the best way to study</h1>
                     <h3 className="lg:text-md font-bold lg:text-slate-300 lg:mt-8 mt-10 md:w-2/3 lg:w-5/6 text-center 2xl:text-lg  text-slate-400 w-5/6">Join one of the fastest growing digital study tools used by millions across the globe Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</h3>
 
                     <button className=" rounded-md bg-blue-700 p-3 mt-10 text-sm font-bold text-slate-100">Sign up now</button>
