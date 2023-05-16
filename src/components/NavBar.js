@@ -13,8 +13,8 @@ export default function NavBar() {
             </div>
 
             <div className="hidden space-x-10 md:flex items-center  md:flex-1 md:justify-end md:mr-6">
-                <a href="#">Log in</a>
-                <a href="#" className=" bg-yellow-300 rounded-md p-2">Sign up</a>
+                <a href="/signIn">Log in</a>
+                <a href="/createAccount" className=" bg-yellow-300 rounded-md p-2">Sign up</a>
             </div>
         </div>
     )

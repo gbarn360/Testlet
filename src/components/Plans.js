@@ -14,7 +14,7 @@ export default function Plans({ title, features, btnColor }) {
                 })}
             </ul>
             <div className="flex justify-center">
-                <button
+                <button onClick={() => { window.location.href = "/createAccount" }}
                     className={`${buttonStyle} text-white font-medium p-2 rounded-lg mt-5 w-1/2 m-6 shadow-md`}
                 >
                     Sign up
