@@ -19,7 +19,7 @@ export default function Root() {
                     <h1 className="text-5xl md:text-5xl font-bold lg:text-slate-800 text-center mt-10 ml-2 mr-2 lg:mt-0 lg:ml-0 lg:mr-0  2xl:text-7xl text-slate-800 drop-shadow-md">Discover the best way to study</h1>
                     <h3 className="lg:text-md font-bold lg:text-slate-300 lg:mt-8 mt-10 md:w-2/3 lg:w-5/6 text-center 2xl:text-lg  text-slate-400 w-5/6">Join one of the fastest growing digital study tools used by millions across the globe Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</h3>
 
-                    <button onClick={() => { window.location.href = "/signIn" }} className=" rounded-md bg-blue-700 p-3 mt-10 text-sm font-bold text-slate-100">Sign up now</button>
+                    <button onClick={() => { window.location.href = "/createAccount" }} className=" rounded-md bg-blue-700 p-3 mt-10 text-sm font-bold text-slate-100">Sign up now</button>
                 </div>
             </div>
 

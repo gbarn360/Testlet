@@ -1,9 +1,32 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { AiOutlineClose } from 'react-icons/ai';
 
 
 
 export default function SignIn() {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+
+
+    const logUserIn = () => {
+        try {
+            axios.post("http://localhost:8000/signIn.php", {
+                item: {
+                    email: email,
+                    password: password,
+                }
+
+            })
+                .then(response => { if (response.data == "success") { window.location.href = "/home" } })
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const accentColor = "blue-500";
     return (
@@ -35,7 +58,7 @@ export default function SignIn() {
                         </div>
 
                         <div className="flex flex-col w-5/6">
-                            <button className={`bg-${accentColor} mt-10 h-16 text-xl font-medium text-white rounded-md`}>Log In</button>
+                            <button onClick={() => { logUserIn() }} className={`bg-${accentColor} mt-10 h-16 text-xl font-medium text-white rounded-md`}>Log In</button>
                             <div className="flex flex-row border-2 border-slate-300 mt-5 p-2 justify-center space-x-2 text-sm rounded-md">
                                 <h3 className="font-medium text-slate-700">New to Testlet?</h3>
                                 <button onClick={() => { window.location.href = "/createAccount" }} className={`text-${accentColor}`}>Create an account</button>
