@@ -5,6 +5,7 @@ import SignIn from "./components/SignIn";
 import CreateAccount from "./components/CreateAccount";
 import PagenotFound from "./screens/PagenotFound";
 import Home from "./screens/Home";
+import SubjectPage from "./components/SubjectPage";
 import "./App.css";
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/createAccount" element={<CreateAccount />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/home/subject" element={<SubjectPage />} />
           <Route path="*" element={<PagenotFound />} />
 
         </Routes>
