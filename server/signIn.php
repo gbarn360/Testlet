@@ -14,7 +14,7 @@ if (isset($data["item"]["email"]) && isset($data["item"]["password"])) {
     $email = $data["item"]["email"];
     $password = $data["item"]["password"];
 
-    $response = null;
+    $response = "success";
 
     echo $response;
 }

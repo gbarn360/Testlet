@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Subject({ name }) {
     const [isHovered, setIsHovered] = useState(false);
 
+
     return (
-        <div onClick={() => { window.location.href = "/home/subject" }}
+        <div onClick={() => { window.location.href = `/home/${name.replace(/ /g, "_")}` }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             className="w-3/4 h-56 bg-slate-100 mb-10 rounded-lg shadow-lg flex justify-center items-center hover:bg-slate-800 transition-colors duration-200"

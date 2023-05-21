@@ -152,9 +152,9 @@ export default function CreateAccount() {
                     </div>
                     <div className="flex flex-row md:flex-col space-x-10  mb-10 justify-start ">
                         <div className="flex flex-col md:flex-row md: space-x-10 md:ml-11">
-                            <input onChange={(e) => { setFirstname(e.target.value) }} value={firstname} type="text" name="firstname" placeholder="First name" className="ml-10 md:ml-0  w-24 placeholder-slate-300 border-b-2 border-blue-500 p-2 text-center outline-none" />
-                            <input onChange={(e) => { setLastname(e.target.value) }} value={lastname} type="text" name="lastname" placeholder="Last name" className="w-24 placeholder-slate-300 border-b-2 border-blue-500 p-2 text-center outline-none" />
-                            <button onClick={() => { setShowCalendar(true); }} className="w-24  border-b-2 border-blue-500 p-2 text-center outline-none text-slate-300">{dateVal}</button>
+                            <input onChange={(e) => { setFirstname(e.target.value) }} value={firstname} type="text" name="firstname" placeholder="First name" className="ml-10 md:ml-0  w-24 placeholder-slate-300 border-b-2 border-blue-800 p-2 text-center outline-none" />
+                            <input onChange={(e) => { setLastname(e.target.value) }} value={lastname} type="text" name="lastname" placeholder="Last name" className="w-24 placeholder-slate-300 border-b-2 border-blue-800 p-2 text-center outline-none" />
+                            <button onClick={() => { setShowCalendar(true); }} className="w-24  border-b-2 border-blue-800 p-2 text-center outline-none text-slate-300">{dateVal}</button>
                         </div>
                         <h3 className="text-red-600 font-medium mt-9 md:mt-2">
                             {personalInfoMessage.split('\n').map((item) => (
@@ -193,10 +193,10 @@ export default function CreateAccount() {
                         </div>
 
                         <div className="flex flex-col w-5/6  ">
-                            <button onClick={() => { if (confirmPassword == password) logUserIn() }} className="bg-blue-500 mt-10 h-16 text-xl font-medium text-white rounded-md">Sign up</button>
+                            <button onClick={() => { if (confirmPassword == password) logUserIn() }} className="bg-blue-800 mt-10 h-16 text-xl font-medium text-white rounded-md">Sign up</button>
                             <div className="flex flex-row border-2 border-slate-300 mt-5 p-2 justify-center space-x-2 text-sm rounded-md">
                                 <h3 className="font-medium text-slate-700">Already have an account?</h3>
-                                <button onClick={() => { window.location.href = "/signIn" }} className="text-blue-500">Sign in</button>
+                                <button onClick={() => { window.location.href = "/signIn" }} className="text-blue-800">Sign in</button>
                             </div>
                         </div>
                         <div className="h-10"></div>
