@@ -28,7 +28,7 @@ export default function SignIn() {
         }
     }
 
-    const accentColor = "blue-500";
+    const accentColor = "blue-800";
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 w-screen h-screen ">
             <div className="hidden md:block bg-yellow-500">

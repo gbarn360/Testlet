@@ -6,6 +6,9 @@ header("Access-Control-Allow-Headers: Content-Type");
 $request_body = file_get_contents('php://input');
 $data = json_decode($request_body, true);
 
+$members = array();
+
+
 function verifyPersonal($firstname, $lastname, $dob)
 {
     $message = "";
@@ -70,41 +73,51 @@ function verifyPassword($password)
     return $passwordFormatMessage;
 }
 
+if (isset($data["item"]["email"]) && isset($data["item"]["password"]) && isset($data["item"]["firstname"]) && isset($data["item"]["lastname"]) && isset($data["item"]["dob"])) {
+    $email = $data["item"]["email"];
+    $password = $data["item"]["password"];
+    $firstname = $data["item"]["firstname"];
+    $lastname = $data["item"]["lastname"];
+    $dob = $data["item"]["dob"];
 
-$email = $data["item"]["email"];
-$password = $data["item"]["password"];
-$firstname = $data["item"]["firstname"];
-$lastname = $data["item"]["lastname"];
-$dob = $data["item"]["dob"];
 
 
+    $personalResp = verifyPersonal($firstname, $lastname, $dob);
+    $emailResp = verifyEmail($email);
+    $passwordResp = verifyPassword($password);
 
-$personalResp = verifyPersonal($firstname, $lastname, $dob);
-$emailResp = verifyEmail($email);
-$passwordResp = verifyPassword($password);
+    $response = new stdClass();
+    $response->status = "success";
+    $issues = array();
 
-$response = new stdClass();
-$response->status = "success";
-$issues = array();
+    if ($personalResp != "") {
+        $personal = new stdClass();
+        $personal->personal = $personalResp;
+        array_push($issues, $personal);
+        $response->status = "fail";
+    }
+    if ($emailResp != "") {
+        $email = new stdClass();
+        $email->email = $emailResp;
+        array_push($issues, $email);
+        $response->status = "fail";
+    }
+    if ($passwordResp != "") {
+        $password = new stdClass();
+        $password->password = $passwordResp;
+        array_push($issues, $password);
+        $response->status = "fail";
+    }
+    $response->issues = $issues;
 
-if ($personalResp != "") {
-    $personal = new stdClass();
-    $personal->personal = $personalResp;
-    array_push($issues, $personal);
-    $response->status = "fail";
+    if ($response->status == "success") {
+        $user = new stdClass();
+        $user->firstName = $firstname;
+        $user->lastName = $lastname;
+        $user->email = $email;
+        $user->password = $password;
+        array_push($members, $user);
+    }
+
+    echo json_encode($response);
 }
-if ($emailResp != "") {
-    $email = new stdClass();
-    $email->email = $emailResp;
-    array_push($issues, $email);
-    $response->status = "fail";
-}
-if ($passwordResp != "") {
-    $password = new stdClass();
-    $password->password = $passwordResp;
-    array_push($issues, $password);
-    $response->status = "fail";
-}
-$response->issues = $issues;
-
-echo json_encode($response);
