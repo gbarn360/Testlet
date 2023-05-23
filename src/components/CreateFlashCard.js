@@ -1,12 +1,48 @@
 import React, { useState } from "react";
 import NavBar from "./NavBar";
 import Flashcard from "./Flashcard";
+import { v4 as uuidv4 } from 'uuid';
+
 
 export default function CreateFlashCard() {
+
+
     const [subject, setSubject] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [flashcards, setFlashcards] = useState([{ index: 1, id: uuidv4() },]);
+    const [count, setCount] = useState(1);
 
+
+    function deleteCard(id) {
+        setFlashcards((prevFlashcards) => {
+
+            if (prevFlashcards.length == 1) {
+                return prevFlashcards;
+            }
+            const updatedFlashcards = prevFlashcards.filter(
+                (flashcard) => flashcard.id !== id
+            );
+
+            const updatedFlashcardsWithIndex = updatedFlashcards.map((flashcard, index) => ({
+                ...flashcard,
+                index: index + 1,
+            }));
+            setCount(prevFlashcards.length - 1)
+
+            return updatedFlashcardsWithIndex;
+        });
+    }
+
+
+    function addFlashcard() {
+        const newCount = count + 1;
+        setFlashcards((prevFlashcards) => [
+            ...prevFlashcards,
+            { index: newCount, id: uuidv4() },
+        ]);
+        setCount(newCount);
+    }
 
     return (
 
@@ -35,11 +71,21 @@ export default function CreateFlashCard() {
 
             </div>
             <div className="w-screen flex flex-col justify-center items-center mt-20">
-                <Flashcard index={1} />
-                <Flashcard index={2} />
-                <Flashcard index={3} />
+                {flashcards.map((flashcard) => (
+                    <Flashcard
+                        key={flashcard.id}
+                        index={flashcard.index}
+                        deleteItem={deleteCard}
+                        id={flashcard.id}
+                    />
+                ))}
 
-                <button className="bg-blue-800 w-1/4 p-2 rounded-xl text-white mt-10">add another</button>
+                <button onClick={addFlashcard} className="border-b-2 border-blue-800 w-1/4 p-2  text-slate-800 mt-10 font-medium">
+                    add another
+                </button>
+            </div>
+            <div className=" flex justify-end mt-10 h-20 items-center">
+                <button className="mr-10 bg-blue-800 w-24  h-1/2 p-2 rounded-xl text-white">Create</button>
             </div>
         </div>
     )
