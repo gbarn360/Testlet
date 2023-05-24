@@ -3,7 +3,7 @@ import React from "react";
 export default function CreateCard({ display, Icon, color, header, text }) {
 
     return (
-        <div onClick={() => { window.location.href = `/home/${display}` }} className={`w-1/3 h-3/4 bg-${color}-200 rounded-lg m-10 flex flex-row shadow-lg hover:bg-${color}-400 transition-colors duration-200 ease-in-out`}>
+        <div onClick={() => { window.location.href = `/home/${display}` }} className={`w-1/3 h-32 bg-${color}-200 rounded-lg m-10 flex flex-row shadow-lg hover:bg-${color}-400 transition-colors duration-200 ease-in-out`}>
             <div className="w-1/4 h-full  flex justify-center items-center">
                 <Icon className={`text-4xl text-${color}-700`} />
             </div>

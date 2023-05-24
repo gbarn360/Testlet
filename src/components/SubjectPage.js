@@ -18,7 +18,7 @@ export default function SubjectPage() {
                     </div>
                     <div className="w-2/3 flex flex-row justify-end items-start ">
                         <CreateCard Icon={BsBoxFill} color={"yellow"} header={"Create Quiz"} text={"For testing your knowledge"} />
-                        <CreateCard Icon={RxCardStack} color={"blue"} header={"Create Flashcard"} text={"For creating key-answer pairs"} />
+                        <CreateCard display={"createFlashcard"} Icon={RxCardStack} color={"blue"} header={"Create Flashcard"} text={"For creating key-answer pairs"} />
                     </div>
                 </div>
                 <div className="w-screen h-screen grid grid-cols-2 mt-20">

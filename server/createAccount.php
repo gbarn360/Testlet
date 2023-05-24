@@ -6,8 +6,7 @@ header("Access-Control-Allow-Headers: Content-Type");
 $request_body = file_get_contents('php://input');
 $data = json_decode($request_body, true);
 
-$members = array();
-
+include("database.php");
 
 function verifyPersonal($firstname, $lastname, $dob)
 {
@@ -108,16 +107,25 @@ if (isset($data["item"]["email"]) && isset($data["item"]["password"]) && isset($
         array_push($issues, $password);
         $response->status = "fail";
     }
-    $response->issues = $issues;
+
 
     if ($response->status == "success") {
         $user = new stdClass();
         $user->firstName = $firstname;
         $user->lastName = $lastname;
         $user->email = $email;
-        $user->password = $password;
-        array_push($members, $user);
+        $user->password = password_hash($password, PASSWORD_BCRYPT);
+        $user->dob = $dob;
+
+        if (createUser($user, $pdo)) {
+            $email = new stdClass();
+            $email->email = "email already exists";
+            array_push($issues, $email);
+            $response->status = "fail";
+        }
     }
+    $response->issues = $issues;
+
 
     echo json_encode($response);
 }

@@ -8,7 +8,7 @@ export default function SignIn() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const [errorMessage, setErrorMessage] = useState("");
 
 
     const logUserIn = () => {
@@ -20,7 +20,11 @@ export default function SignIn() {
                 }
 
             })
-                .then(response => { if (response.data == "success") { window.location.href = "/home" } })
+                .then(response => {
+                    console.log(response.data)
+                    if (response.data == "success") { window.location.href = "/home" }
+                    else { setErrorMessage("account was not recognized") }
+                })
 
 
         } catch (error) {
@@ -45,12 +49,12 @@ export default function SignIn() {
                     </div>
                     <div className="flex flex-col  ml-10 space-y-10">
                         <div>
-                            <input type="text" name="email" placeholder="Type your email address" className="w-5/6 border-b-2 p-2 border-slate-800 placeholder-slate-300 outline-none" />
+                            <input onChange={(e) => { setEmail(e.target.value) }} type="text" name="email" placeholder="Type your email address" className="w-5/6 border-b-2 p-2 border-slate-800 placeholder-slate-300 outline-none" />
                             <h3 className="text-slate-400 font-medium">Email</h3>
                         </div>
 
                         <div>
-                            <input type="password" name="password" placeholder="Type your password" className="w-5/6 border-b-2 p-2 border-slate-800 placeholder-slate-300 outline-none" />
+                            <input onChange={(e) => { setPassword(e.target.value) }} type="password" name="password" placeholder="Type your password" className="w-5/6 border-b-2 p-2 border-slate-800 placeholder-slate-300 outline-none" />
                             <div className="flex flex-row justify-between w-5/6">
                                 <h3 className="text-slate-400 font-medium">Password</h3>
                                 <button className={`text-${accentColor}`}>Forgot?</button>
@@ -58,6 +62,7 @@ export default function SignIn() {
                         </div>
 
                         <div className="flex flex-col w-5/6">
+                            <h1 className=" text-center text-red-500">{errorMessage}</h1>
                             <button onClick={() => { logUserIn() }} className={`bg-${accentColor} mt-10 h-16 text-xl font-medium text-white rounded-md`}>Log In</button>
                             <div className="flex flex-row border-2 border-slate-300 mt-5 p-2 justify-center space-x-2 text-sm rounded-md">
                                 <h3 className="font-medium text-slate-700">New to Testlet?</h3>
