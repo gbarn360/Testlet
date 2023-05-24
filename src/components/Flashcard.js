@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiTrash } from 'react-icons/fi';
 
-export default function Flashcard({ index, deleteItem, id }) {
-    const [term, setTerm] = useState("");
-    const [definition, setDefinition] = useState("");
+export default function Flashcard({ index, deleteItem, id, onTermChange, onDefinitionChange }) {
+
+
 
     return (
         <div className="w-screen h-60 flex flex-row  space-x-5 border-t-2 border-slate-300">
@@ -13,8 +13,7 @@ export default function Flashcard({ index, deleteItem, id }) {
             <div className="w-1/3 m-5 bg-white rounded-lg shadow-md flex justify-center">
                 <div className="w-5/6  flex flex-col justify-center mt-20">
                     <input
-                        onChange={(e) => setTerm(e.target.value)}
-                        value={term}
+                        onChange={(e) => onTermChange(index, e.target.value)}
                         className="w-5/6 border-b-2 border-slate-800 text-sm pb-1 outline-none"
                         type="text"
                         placeholder="enter term"
@@ -25,8 +24,7 @@ export default function Flashcard({ index, deleteItem, id }) {
             <div className="w-1/3 m-5 bg-white rounded-lg shadow-md flex justify-center">
                 <div className="w-5/6  flex flex-col justify-center mt-20">
                     <input
-                        onChange={(e) => setDefinition(e.target.value)}
-                        value={definition}
+                        onChange={(e) => onDefinitionChange(index, e.target.value)}
                         className="w-5/6 border-b-2 border-slate-800 text-sm pb-1 outline-none whitespace-pre-wrap"
                         type="text"
                         placeholder="enter definition"

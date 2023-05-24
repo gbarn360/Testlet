@@ -7,8 +7,13 @@ $request_body = file_get_contents('php://input');
 $data = json_decode($request_body, true);
 
 
-if (isset($data["item"]["name"])) {
-    $subject = $data["item"]["name"];
+if (isset($data["item"]["subject"]) && isset($data["item"]["title"]) && isset($data["item"]["description"]) && isset($data["item"]["flashcards"])) {
+    $subject = $data["item"]["subject"];
+    $title = $data["item"]["title"];
+    $description = $data["item"]["description"];
+    $flashcards = $data["item"]["flashcards"];
 
-    echo "{$subject} has been recieved by server";
+    $reponse = print_r($flashcards);
+
+    echo "recieved flashcards on server :{$response} ";
 }

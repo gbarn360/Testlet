@@ -15,7 +15,7 @@ export default function Home() {
     return (
         <div >
             <Navbar />
-            <div className="w-screen h-screen flex flex-col " >
+            <div className="w-screen h-auto flex flex-col bg-slate-100 " >
                 <div className="w-screen h-2/5  flex flex-row items-center justify-start">
                     <CreateCard display={"createSubject"} Icon={BsBoxFill} color={"emerald"} header={"Create Subject"} text={"For organizing your flashcards and quizzes"} />
                     <CreateCard display={"createFlashcard"} Icon={RxCardStack} color={"blue"} header={"Create Flashcard"} text={"For creating key-answer pairs"} />

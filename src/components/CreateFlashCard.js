@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NavBar from "./NavBar";
 import Flashcard from "./Flashcard";
 import { v4 as uuidv4 } from 'uuid';
+import axios from "axios";
 
 
 export default function CreateFlashCard() {
@@ -10,8 +11,41 @@ export default function CreateFlashCard() {
     const [subject, setSubject] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [flashcards, setFlashcards] = useState([{ index: 1, id: uuidv4() },]);
+    const [flashcards, setFlashcards] = useState([{ index: 1, id: uuidv4(), term: "", definition: "" },]);
     const [count, setCount] = useState(1);
+
+
+
+
+    const saveFlashCardSet = async () => {
+        try {
+            console.log(flashcards);
+            await axios.post("http://localhost:8000/createFlashcard.php", {
+                item: {
+                    subject: subject,
+                    title: title,
+                    description: description,
+                    flashcards: flashcards
+                }
+            }).then(response => console.log(response.data))
+
+            window.location.href = `/home/${subject.replace(/ /g, "_")}`;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const termChange = (index, term) => {
+        let updatedList = [...flashcards];
+        updatedList[index - 1].term = term;
+        setFlashcards(updatedList);
+    }
+    const definitionChange = (index, definition) => {
+        let updatedList = [...flashcards];
+        updatedList[index - 1].definition = definition;
+        setFlashcards(updatedList);
+
+    }
 
 
     function deleteCard(id) {
@@ -39,7 +73,7 @@ export default function CreateFlashCard() {
         const newCount = count + 1;
         setFlashcards((prevFlashcards) => [
             ...prevFlashcards,
-            { index: newCount, id: uuidv4() },
+            { index: newCount, id: uuidv4(), term: "", definition: "" },
         ]);
         setCount(newCount);
     }
@@ -72,11 +106,17 @@ export default function CreateFlashCard() {
             </div>
             <div className="w-screen flex flex-col justify-center items-center mt-20">
                 {flashcards.map((flashcard) => (
+
                     <Flashcard
                         key={flashcard.id}
                         index={flashcard.index}
                         deleteItem={deleteCard}
                         id={flashcard.id}
+                        term={flashcard.term}
+                        definition={flashcard.definition}
+                        onTermChange={(index, value) => termChange(index, value)}
+                        onDefinitionChange={(index, value) => definitionChange(index, value)}
+
                     />
                 ))}
 
@@ -85,7 +125,7 @@ export default function CreateFlashCard() {
                 </button>
             </div>
             <div className=" flex justify-end mt-10 h-20 items-center">
-                <button className="mr-10 bg-blue-800 w-24  h-1/2 p-2 rounded-xl text-white">Create</button>
+                <button onClick={() => { saveFlashCardSet() }} className="mr-10 bg-blue-800 w-24  h-1/2 p-2 rounded-xl text-white">Create</button>
             </div>
         </div>
     )
