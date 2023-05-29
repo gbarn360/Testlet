@@ -5,10 +5,10 @@ import { v4 as uuidv4 } from 'uuid';
 import axios from "axios";
 
 
-export default function CreateFlashCard() {
+export default function CreateFlashCard({ subjectName }) {
 
 
-    const [subject, setSubject] = useState("");
+    const [subject, setSubject] = useState(subjectName);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [flashcards, setFlashcards] = useState([{ index: 1, id: uuidv4(), term: "", definition: "" },]);
@@ -25,7 +25,8 @@ export default function CreateFlashCard() {
                     subject: subject,
                     title: title,
                     description: description,
-                    flashcards: flashcards
+                    flashcards: flashcards,
+                    token: localStorage.getItem("token")
                 }
             }).then(response => console.log(response.data))
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function Subject({ name }) {
+export default function Subject({ name, subjectId }) {
     const [isHovered, setIsHovered] = useState(false);
 
 

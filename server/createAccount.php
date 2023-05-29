@@ -1,4 +1,9 @@
 <?php
+require 'vendor/autoload.php';
+
+use Firebase\JWT\JWT;
+
+
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
@@ -6,7 +11,9 @@ header("Access-Control-Allow-Headers: Content-Type");
 $request_body = file_get_contents('php://input');
 $data = json_decode($request_body, true);
 
+
 include("database.php");
+include("token.php");
 
 function verifyPersonal($firstname, $lastname, $dob)
 {
@@ -72,6 +79,7 @@ function verifyPassword($password)
     return $passwordFormatMessage;
 }
 
+
 if (isset($data["item"]["email"]) && isset($data["item"]["password"]) && isset($data["item"]["firstname"]) && isset($data["item"]["lastname"]) && isset($data["item"]["dob"])) {
     $email = $data["item"]["email"];
     $password = $data["item"]["password"];
@@ -117,15 +125,23 @@ if (isset($data["item"]["email"]) && isset($data["item"]["password"]) && isset($
         $user->password = password_hash($password, PASSWORD_BCRYPT);
         $user->dob = $dob;
 
-        if (createUser($user, $pdo)) {
+        $databaseResult = createUser($user, $pdo);
+        if ($databaseResult == 'true') {
             $email = new stdClass();
             $email->email = "email already exists";
             array_push($issues, $email);
             $response->status = "fail";
+        } else {
+            $tokenContent = [
+                'userId' => $databaseResult,
+            ];
+            $algorithm = 'HS256';
+            $token = JWT::encode($tokenContent, $tokenKey, $algorithm);
+            $response->token = $tokenContent;
         }
     }
-    $response->issues = $issues;
 
+    $response->issues = $issues;
 
     echo json_encode($response);
 }

@@ -22,7 +22,7 @@ export default function SignIn() {
             })
                 .then(response => {
                     console.log(response.data)
-                    if (response.data == "success") { window.location.href = "/home" }
+                    if (response.data.status == "success") { localStorage.setItem("token", response.data.token.userId); window.location.href = "/home" }
                     else { setErrorMessage("account was not recognized") }
                 })
 
