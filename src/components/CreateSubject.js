@@ -11,9 +11,11 @@ export default function CreateSubject() {
         if (subjectName.length > 0) {
             //make api call
             try {
+                console.log(localStorage.getItem("token"));
                 await axios.post("http://localhost:8000/createSubject.php", {
                     item: {
-                        name: subjectName
+                        name: subjectName,
+                        token: localStorage.getItem("token")
                     }
                 })
                     .then(response => console.log(response));

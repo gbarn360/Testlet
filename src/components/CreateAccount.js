@@ -32,7 +32,7 @@ export default function CreateAccount() {
                 },
             })
                 .then(response => {
-                    if (response.data.status == "success") { window.location.href = "/home" }
+                    if (response.data.status == "success") { localStorage.setItem("token", response.data.token.userId.id); window.location.href = "/home" }
                     else {
                         setPersonalInfoMessage("");
                         setEmailMessage("");

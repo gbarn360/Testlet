@@ -1,0 +1,9 @@
+{
+    "name": "barnh/testlet",
+    "description": "n/a",
+    "type": "library",
+    "require": {
+        "ramsey/uuid": "^4.7",
+        "firebase/php-jwt": "^6.5"
+    }
+}

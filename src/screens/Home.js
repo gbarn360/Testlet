@@ -1,16 +1,28 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/NavBar";
 import CreateCard from "../components/CreateCard";
-import Subject from "../components/Subject";
+import axios from "axios";
 import { BsBoxFill } from 'react-icons/bs';
 import { RxCardStack } from 'react-icons/rx';
+import Subject from "../components/Subject";
 
 
 export default function Home() {
 
+    const [subjects, setSubjects] = useState([]);
 
+    useEffect(() => {
+        try {
+            axios.post("http://localhost:8000/getSubjects.php", {
+                item: {
+                    token: localStorage.getItem("token")
+                }
+            }).then(response => { setSubjects(response.data) });
 
-
+        } catch (error) {
+            console.log(error);
+        }
+    }, [])
 
     return (
         <div >
@@ -24,10 +36,9 @@ export default function Home() {
                 <div className="w-screen h-screen mt-5">
                     <h1 className="text-lg font-bold text-slate-700 tracking-wide ml-10">Subjects</h1>
                     <div className="grid grid-cols-3 justify-items-center mt-10">
-                        <Subject name={"Math and Stats"} />
-                        <Subject name={"CMPSC 441"} />
-                        <Subject name={"Chemistry 110"} />
-                        <Subject />
+                        {subjects.map((subject) =>
+                            <Subject key={subject.id} name={subject.subjectName} subjectId={subject.id} />
+                        )}
 
                     </div>
                 </div>
