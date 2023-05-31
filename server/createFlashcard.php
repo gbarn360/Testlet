@@ -23,5 +23,7 @@ if (isset($data["item"]["subject"]) && isset($data["item"]["title"]) && isset($d
     $flashcardData->token = $token;
 
 
-    createFlashcardSet($flashcardData, $pdo);
+    $subjectId = createFlashcardSet($flashcardData, $pdo);
+
+    echo $subjectId;
 }

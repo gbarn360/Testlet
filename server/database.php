@@ -4,7 +4,28 @@ $dbname = 'testlet';
 $username = 'root';
 $password = 'Barnhartg+21';
 
-function   getSubjects($token, $pdo)
+function getFlashcards($flashcardSetId, $pdo)
+{
+    $query = "SELECT * FROM flashcards WHERE flashcardSetId = :flashcardSetId";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":flashcardSetId", $flashcardSetId);
+    $stmt->execute();
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $rows;
+}
+
+function getFlashcardSets($subjectId, $pdo)
+{
+    $query = "SELECT * FROM flashcardsets WHERE subjectId = :subjectId";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":subjectId", $subjectId);
+    $stmt->execute();
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $rows;
+}
+
+function getSubjects($token, $pdo)
 {
     $query = "SELECT * FROM subjects WHERE userId = $token";
     $stmt = $pdo->prepare($query);
@@ -58,6 +79,7 @@ function createFlashcardSet($flashcardData, $pdo)
         for ($i = 0; $i < sizeof($flashcardData->flashcards); $i++) {
             createFlashcard($flashcardSetId["id"], $flashcardData->flashcards[$i]["term"], $flashcardData->flashcards[$i]["definition"], $pdo);
         }
+        return $row["id"];
     }
 }
 function createSubject($subject, $token, $pdo)

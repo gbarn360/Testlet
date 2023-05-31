@@ -3,12 +3,17 @@ import NavBar from "./NavBar";
 import Flashcard from "./Flashcard";
 import { v4 as uuidv4 } from 'uuid';
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 
-export default function CreateFlashCard({ subjectName }) {
+export default function CreateFlashCard() {
+    const { subjectName } = useParams();
+    const { id } = useParams();
+
 
 
     const [subject, setSubject] = useState(subjectName);
+    const [subjectId, setSubjectId] = useState(id);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [flashcards, setFlashcards] = useState([{ index: 1, id: uuidv4(), term: "", definition: "" },]);
@@ -28,9 +33,9 @@ export default function CreateFlashCard({ subjectName }) {
                     flashcards: flashcards,
                     token: localStorage.getItem("token")
                 }
-            }).then(response => console.log(response.data))
+            }).then(response => { window.location.href = `/home/${subject.replace(/ /g, "_")}/${response.data}` })
 
-            window.location.href = `/home/${subject.replace(/ /g, "_")}`;
+
         } catch (error) {
             console.log(error);
         }
@@ -89,7 +94,7 @@ export default function CreateFlashCard({ subjectName }) {
             </div>
             <div className="w-screen flex flex-row justify-center ">
                 <div className="flex flex-col w-1/3 m-10 space-y-5">
-                    <div className=" ">
+                    <div className={subjectName == undefined ? "block" : "hidden"}>
                         <h3 className="text-sm ml-1 text-slate-800 mb-1 font-medium">subject</h3>
                         <input onChange={(e) => { setSubject(e.target.value) }} className=" text-sm w-full shadow-md rounded-lg p-3" type="text" placeholder="add a subject name" />
                     </div>

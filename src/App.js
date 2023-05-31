@@ -8,6 +8,7 @@ import Home from "./screens/Home";
 import SubjectPage from "./components/SubjectPage";
 import CreateSubject from "./components/CreateSubject";
 import CreateFlashCard from "./components/CreateFlashCard";
+import FlashcardSetPage from "./screens/FlashcardSetPage";
 import "./App.css";
 
 export default function App() {
@@ -21,9 +22,11 @@ export default function App() {
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/createAccount" element={<CreateAccount />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/home/:subjectId" element={<SubjectPage />} />
+          <Route path="/home/:subjectName/:id" element={<SubjectPage />} />
           <Route path="/home/createSubject" element={<CreateSubject />} />
           <Route path="/home/createFlashCard" element={<CreateFlashCard />} />
+          <Route path="/home/:subjectName/createFlashCard/:id" element={<CreateFlashCard />} />
+          <Route path="/home/:subjectName/:flashcardSet/:id" element={<FlashcardSetPage />} />
 
           <Route path="*" element={<PagenotFound />} />
 
