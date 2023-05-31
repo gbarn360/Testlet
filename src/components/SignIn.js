@@ -39,7 +39,7 @@ export default function SignIn() {
 
             </div>
             <div className="flex flex-col  items-center bg-white ">
-                <div className=" h-screen w-5/6 ">
+                <div className=" h-screen w-5/6 2xl:w-2/3">
                     <div className="flex flex-row h-1/6 space-x-10 mt-4 m-10 justify-center md:justify-between">
                         <div className="flex flex-row space-x-10 mt-8">
                             <button onClick={() => { window.location.href = "/createAccount" }} className=" h-10 text-2xl font-bold text-slate-400">Sign up</button>

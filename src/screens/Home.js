@@ -33,9 +33,9 @@ export default function Home() {
                     <CreateCard subjectName={""} display={"createFlashcard"} Icon={RxCardStack} color={"blue"} header={"Create Flashcard"} text={"For creating key-answer pairs"} />
 
                 </div>
-                <div className="w-screen h-screen mt-5">
-                    <h1 className="text-lg font-bold text-slate-700 tracking-wide ml-10">Subjects</h1>
-                    <div className="grid grid-cols-3 justify-items-center mt-10">
+                <div className="w-screen h-screen mt-5 2xl:mt-16">
+                    <h1 className="text-lg font-bold text-slate-700 tracking-wide ml-10 2xl:text-2xl">Subjects</h1>
+                    <div className="grid grid-cols-3 justify-items-center mt-10 2xl:grid-cols-4">
                         {subjects.map((subject) =>
                             <Subject key={subject.id} name={subject.subjectName} id={subject.id} />
                         )}

@@ -89,28 +89,28 @@ export default function CreateFlashCard() {
         <div className="w-screen h-auto bg-slate-100 ">
             <NavBar />
             <div className="w-screen  flex flex-col justify-start items-center">
-                <h1 className="text-5xl font-bold text-slate-800 mt-20 m-5">Let's create a flashcard set</h1>
-                <h3 className="text-base text-slate-600">Flashcards allow you to create term-definition pairs to help with studying</h3>
+                <h1 className="text-5xl font-bold text-slate-800 mt-20 m-5 2xl:text-6xl">Let's create a flashcard set</h1>
+                <h3 className="text-base text-slate-600 2xl:text-lg">Flashcards allow you to create term-definition pairs to help with studying</h3>
             </div>
-            <div className="w-screen flex flex-row justify-center ">
+            <div className="w-screen flex flex-row justify-center 2xl:mt-10 ">
                 <div className="flex flex-col w-1/3 m-10 space-y-5">
                     <div className={subjectName == undefined ? "block" : "hidden"}>
-                        <h3 className="text-sm ml-1 text-slate-800 mb-1 font-medium">subject</h3>
-                        <input onChange={(e) => { setSubject(e.target.value) }} className=" text-sm w-full shadow-md rounded-lg p-3" type="text" placeholder="add a subject name" />
+                        <h3 className="text-sm ml-1 text-slate-800 mb-1 font-medium 2xl:text-lg 2xl:ml-40">subject</h3>
+                        <input onChange={(e) => { setSubject(e.target.value) }} className=" text-sm w-full shadow-md rounded-lg p-3 2xl:w-2/3 2xl:ml-40 2xl:p-4" type="text" placeholder="add a subject name" />
                     </div>
                     <div className="">
-                        <h3 className="text-sm ml-1 text-slate-800 mb-1 font-medium">title</h3>
-                        <input onChange={(e) => { setTitle(e.target.value) }} className="text-sm w-full shadow-md rounded-lg p-3" type="text" placeholder="title your flashcard set" />
+                        <h3 className="text-sm ml-1 text-slate-800 mb-1 font-medium 2xl:text-lg 2xl:ml-40">title</h3>
+                        <input onChange={(e) => { setTitle(e.target.value) }} className="text-sm w-full shadow-md rounded-lg p-3 2xl:w-2/3 2xl:ml-40 2xl:p-4" type="text" placeholder="title your flashcard set" />
 
                     </div>
                 </div>
                 <div className="w-2/3 m-10 ">
-                    <h3 className="text-sm ml-1 text-slate-800 mb-1 font-medium">description</h3>
-                    <input onChange={(e) => { setDescription(e.target.value) }} className="text-sm w-full  shadow-md rounded-lg pl-2 pt-2 pb-28" type="text" placeholder="add a description..." />
+                    <h3 className="text-sm ml-1 text-slate-800 mb-1 font-medium 2xl:text-lg 2xl:ml-40">description</h3>
+                    <input onChange={(e) => { setDescription(e.target.value) }} className="text-sm w-full  shadow-md rounded-lg pl-2 pt-2 pb-28 2xl:w-2/3 2xl:ml-40 2xl:pb-36" type="text" placeholder="add a description..." />
                 </div>
 
             </div>
-            <div className="w-screen flex flex-col justify-center items-center mt-20">
+            <div className="w-screen flex flex-col justify-center items-center mt-20 2xl:mt-32">
                 {flashcards.map((flashcard) => (
 
                     <Flashcard
@@ -126,12 +126,12 @@ export default function CreateFlashCard() {
                     />
                 ))}
 
-                <button onClick={addFlashcard} className="border-b-2 border-blue-800 w-1/4 p-2  text-slate-800 mt-10 font-medium">
+                <button onClick={addFlashcard} className="border-b-2 border-blue-800 w-1/4 2xl:w-1/6 p-2  text-slate-800 mt-10 font-medium">
                     add another
                 </button>
             </div>
             <div className=" flex justify-end mt-10 h-20 items-center">
-                <button onClick={() => { saveFlashCardSet() }} className="mr-10 bg-blue-800 w-24  h-1/2 p-2 rounded-xl text-white">Create</button>
+                <button onClick={() => { saveFlashCardSet() }} className="mr-10 bg-blue-800 w-24  h-1/2 p-2 rounded-xl text-white 2xl:mr-20 2xl:h-2/3 2xl:text-lg">Create</button>
             </div>
         </div>
     )
