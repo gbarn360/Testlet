@@ -2,7 +2,7 @@ import React from "react"
 export default function NavBar() {
 
     return (
-        <div className=" w-auto h-14 flex flex-row text-sm bg-slate-50 text-slate-600 font-medium sticky top-0 z-20 shadow-xl">
+        <div className=" w-auto h-14 flex flex-row text-sm bg-slate-50 text-slate-600 font-medium sticky top-0 z-40 shadow-xl">
             <div className=" flex justify-center items-center md:ml-10  ">
                 <h1 className=" text-3xl font-bold text-blue-700  w-screen md:w-auto text-center md:text-left" >Testlet</h1>
             </div>
