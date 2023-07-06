@@ -24,7 +24,6 @@ export default function CreateFlashCard() {
 
     const saveFlashCardSet = async () => {
         try {
-            console.log(flashcards);
             await axios.post("http://localhost:8000/createFlashcard.php", {
                 item: {
                     subject: subject,

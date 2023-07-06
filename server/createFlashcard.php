@@ -21,9 +21,11 @@ if (isset($data["item"]["subject"]) && isset($data["item"]["title"]) && isset($d
     $flashcardData->description = $description;
     $flashcardData->flashcards = $flashcards;
     $flashcardData->token = $token;
+    $subjectId = "";
+    do {
+        $subjectId = createFlashcardSet($flashcardData, $pdo);
+    } while ($subjectId == "");
 
-
-    $subjectId = createFlashcardSet($flashcardData, $pdo);
 
     echo $subjectId;
 }
