@@ -4,6 +4,76 @@ $dbname = 'testlet';
 $username = 'root';
 $password = 'Barnhartg+21';
 
+function deleteCardSet($flashcardSetId, $pdo)
+{
+    $query = "DELETE FROM flashcards WHERE flashcardSetId = :id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":id", $flashcardSetId);
+    $stmt->execute();
+
+    $query = "DELETE FROM flashcardsets WHERE id = :id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":id", $flashcardSetId);
+    $stmt->execute();
+}
+
+
+function deleteSubject($subjectId, $pdo)
+{
+    $query = "SELECT id FROM flashcardsets WHERE subjectId = :subjectId";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":subjectId", $subjectId);
+    $stmt->execute();
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    for ($i = 0; $i < sizeof($rows); $i++) {
+        $query = "DELETE FROM flashcards WHERE flashcardSetId = :id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":id", $rows[$i]["id"]);
+        $stmt->execute();
+    }
+    $query = "DELETE FROM flashcardsets WHERE subjectId = :id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":id", $subjectId);
+    $stmt->execute();
+    $query = "DELETE FROM subjects WHERE id = :id";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":id", $subjectId);
+    $stmt->execute();
+}
+
+function deleteCards($cards, $pdo)
+{
+    for ($i = 0; $i < sizeof($cards); $i++) {
+        $query = "DELETE FROM flashcards WHERE id = :id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":id", $cards[$i]["id"]);
+        $stmt->execute();
+    }
+}
+
+
+function updateFlashcards($flashcards, $setId, $pdo)
+{
+    for ($i = 0; $i < sizeof($flashcards); $i++) {
+        if ($flashcards[$i]["id"] == null) {
+            $query = "INSERT INTO flashcards(flashcardSetId,term,def) VALUES(:setId,:term,:def)";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(":setId", $setId);
+            $stmt->bindParam(":term", $flashcards[$i]["term"]);
+            $stmt->bindParam(":def", $flashcards[$i]["def"]);
+            $stmt->execute();
+            continue;
+        }
+        $query = "UPDATE flashcards SET term = :term,def=:def WHERE id = :id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":term", $flashcards[$i]["term"]);
+        $stmt->bindParam(":def", $flashcards[$i]["def"]);
+        $stmt->bindParam(":id", $flashcards[$i]["id"]);
+        $stmt->execute();
+    }
+}
+
 function getFlashcards($flashcardSetId, $pdo)
 {
     $query = "SELECT * FROM flashcards WHERE flashcardSetId = :flashcardSetId";
