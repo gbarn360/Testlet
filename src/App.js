@@ -9,6 +9,8 @@ import SubjectPage from "./components/SubjectPage";
 import CreateSubject from "./components/CreateSubject";
 import CreateFlashCard from "./components/CreateFlashCard";
 import FlashcardSetPage from "./screens/FlashcardSetPage";
+import CreateQuizPage from "./screens/CreateQuizPage";
+import Quiz from "./screens/Quiz";
 import "./App.css";
 
 export default function App() {
@@ -27,6 +29,9 @@ export default function App() {
           <Route path="/home/createFlashCard" element={<CreateFlashCard />} />
           <Route path="/home/:subjectName/createFlashCard/:id" element={<CreateFlashCard />} />
           <Route path="/home/:subjectName/:flashcardSet/:id" element={<FlashcardSetPage />} />
+          <Route path="/home/:subjectName/createQuiz/:id" element={<CreateQuizPage />} />
+          <Route path="home/:subjectName/Quiz/:flashcardSet/:flashcardSetId/:answerWith/:multChoice/:true_False/:matching" element={<Quiz />} />
+
 
           <Route path="*" element={<PagenotFound />} />
 

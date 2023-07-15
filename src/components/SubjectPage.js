@@ -44,11 +44,11 @@ export default function SubjectPage() {
             <NavBar />
             <div className="w-screen h-auto flex flex-col bg-slate-100">
                 <div className="w-screen  flex flex-row">
-                    <div className="w-1/3 flex justify-start items-start ">
+                    <div className="w-1/3 flex ">
                         <h1 className="text-7xl font-bold  h-full pt-10 pl-10 text-slate-800  xl:m-5">{subjectName.replace(/_/g, " ")}</h1>
                     </div>
-                    <div className="w-2/3 flex flex-row justify-end items-start xl:justify-center">
-                        <CreateCard subjectId={id} subjectName={subjectName} Icon={BsBoxFill} color={"yellow"} header={"Create Quiz"} text={"For testing your knowledge"} />
+                    <div className="w-2/3 flex flex-row justify-center items-start xl:justify-center">
+                        <CreateCard subjectId={id} subjectName={subjectName} display={"createQuiz"} Icon={BsBoxFill} color={"yellow"} header={"Create Quiz"} text={"For testing your knowledge"} />
                         <CreateCard subjectId={id} subjectName={subjectName} display={"createFlashcard"} Icon={RxCardStack} color={"blue"} header={"Create Flashcard"} text={"For creating key-answer pairs"} />
                     </div>
                 </div>
@@ -60,7 +60,7 @@ export default function SubjectPage() {
                         )}
                     </div>
                     <div className="">
-                        <h1 className="text-lg font-bold text-slate-700 tracking-wide ml-10 xl:text-2xl">Quizzes</h1>
+                        {/* <h1 className="text-lg font-bold text-slate-700 tracking-wide ml-10 xl:text-2xl">Quizzes</h1> */}
 
                     </div>
                     <div className="w-screen flex justify-end mb-5 h-full items-end">
