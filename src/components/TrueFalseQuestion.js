@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function TrueFalseQuestion({ term, definition }) {
+export default function TrueFalseQuestion({ term, definition, answerResult, answer, questionNumber }) {
 
     const [trueSelected, setTrueSelected] = useState(false);
     const [falseSelected, setFalseSelected] = useState();
 
-    const [answer, setAnswer] = useState();
+    const [selectedAnswer, setSelectedAnswer] = useState();
+
+    useEffect(() => {
+        if (selectedAnswer == answer) {
+            answerResult({ questionNumber: questionNumber, answer: "correct", correctAnswer: answer })
+        }
+        else {
+            answerResult({ questionNumber: questionNumber, answer: "incorrect", correctAnswer: answer })
+        }
+
+    }, [selectedAnswer])
     return (
         <div className="bg-white rounded-lg shadow-lg w-2/3 h-80">
             <div className="flex flex-row justify-center h-2/3 ">
@@ -20,8 +30,8 @@ export default function TrueFalseQuestion({ term, definition }) {
             </div>
 
             <div className="flex flex-row justify-center space-x-20 mt-4">
-                <button onClick={() => { setAnswer("true"); setTrueSelected(true); setFalseSelected(false) }} className={trueSelected ? 'bg-blue-800 rounded-lg w-1/4 py-2 text-white' : `border-2 border-slate-300 rounded-lg w-1/4 py-2 hover:py-2 hover:text-white hover:bg-blue-800 hover:border-blue-800`}>True</button>
-                <button onClick={() => { setAnswer("false"); setFalseSelected(true); setTrueSelected(false) }} className={falseSelected ? 'bg-blue-800 rounded-lg w-1/4 py-2 text-white' : `border-2 border-slate-300 rounded-lg w-1/4 py-2 hover:py-2 hover:text-white hover:bg-blue-800 hover:border-blue-800`}>False</button>
+                <button onClick={() => { setSelectedAnswer("true"); setTrueSelected(true); setFalseSelected(false) }} className={trueSelected ? 'bg-blue-800 rounded-lg w-1/4 py-2 text-white' : `border-2 border-slate-300 rounded-lg w-1/4 py-2 hover:py-2 hover:text-white hover:bg-blue-800 hover:border-blue-800`}>True</button>
+                <button onClick={() => { setSelectedAnswer("false"); setFalseSelected(true); setTrueSelected(false) }} className={falseSelected ? 'bg-blue-800 rounded-lg w-1/4 py-2 text-white' : `border-2 border-slate-300 rounded-lg w-1/4 py-2 hover:py-2 hover:text-white hover:bg-blue-800 hover:border-blue-800`}>False</button>
             </div>
         </div >
     )

@@ -10,9 +10,10 @@ export default function CreateQuizPage() {
     const [flashcardSets, setFlashcardSets] = useState([]);
     const [selectedFlashcardSet, setSelectedFlashcardSet] = useState();
     const [selectedAnswerWith, setSelectedAnswerWith] = useState("Term");
-    const [multipleChoice, setMultipleChoice] = useState("off");
+    const [multipleChoice, setMultipleChoice] = useState("on");
     const [trueFalse, setTrueFalse] = useState("off");
     const [matching, setMatching] = useState("off");
+    const [checked, setChecked] = useState(false)
 
     useEffect(() => {
         axios.post("http://localhost:8000/getFlashcardSets.php", {
@@ -49,21 +50,21 @@ export default function CreateQuizPage() {
 
                     </div>
 
-                    <div className="flex flex-row mt-10 justify-between">
+                    {/* <div className="flex flex-row mt-10 justify-between">
                         <h2 className="font-medium text-lg ">Answer with </h2>
                         <select onChange={(e) => setSelectedAnswerWith(e.target.value)} name="flashcardSets" className=" rounded-md shadow-sm mr-4 w-1/6 p-2">
                             <option>Term</option>
                             <option>Definition</option>
                             <option>Both</option>
                         </select>
-                    </div>
+                    </div> */}
 
                 </div>
                 <div className="w-1/2 space-y-5 border-l-2 border-slate-300 mb-20">
 
                     <div className="flex flex-row justify-between  mr-10 items-center">
                         <h2 className="ml-10 ">Multiple Choice</h2>
-                        <input className="w-4 h-4" type="checkbox" onClick={() => { multipleChoice == "off" ? setMultipleChoice("on") : setMultipleChoice("off") }} />
+                        <input className="w-4 h-4" type="checkbox" checked={!checked} onClick={() => { checked == true ? setChecked(false) : setChecked(true); multipleChoice == "off" ? setMultipleChoice("on") : setMultipleChoice("off") }} />
                     </div>
                     <div className="flex flex-row justify-between  mr-10 items-center">
                         <h2 className="ml-10 ">Fill In</h2>
