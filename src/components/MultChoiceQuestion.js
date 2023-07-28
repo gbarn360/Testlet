@@ -7,10 +7,13 @@ export default function MultChoiceQuestion({ terms, definition, answerResult, an
     const [selectedTerms, setSelectedTerms] = useState([false, false, false, false])
 
     useEffect(() => {
-        if (answer == selectedAnswer)
+        if (answer == selectedAnswer) {
             answerResult({ questionNumber: questionNumber, answer: "correct", correctAnswer: answer })
-        else
+        }
+        else {
             answerResult({ questionNumber: questionNumber, answer: "incorrect", correctAnswer: answer })
+
+        }
 
     }, [selectedAnswer])
 

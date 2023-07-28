@@ -5,13 +5,15 @@ export default function FillInQuestion({ term, definition, answerResult, answer,
     const [selectedAnswer, setSelectedAnswer] = useState("");
 
     useEffect(() => {
-        if (answer == selectedAnswer)
+
+        if (answer.replace(/ /g, '') == selectedAnswer.replace(/ /g, ''))
             answerResult({ questionNumber: questionNumber, answer: "correct", correctAnswer: answer })
         else
             answerResult({ questionNumber: questionNumber, answer: "incorrect", correctAnswer: answer })
 
     }, [selectedAnswer])
     return (
+
         <div className="bg-white rounded-lg shadow-lg w-2/3 h-72 ">
             <div className="flex flex-row justify-center h-2/3 px-10">
                 <h1 className="text-xl text-center mt-10 text-slate-800 overflow-auto" >___________ : {definition}</h1>
