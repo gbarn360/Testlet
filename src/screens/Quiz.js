@@ -5,6 +5,9 @@ import axios from "axios";
 import FillInQuestion from "../components/FillInQuestion";
 import TrueFalseQuestion from "../components/TrueFalseQuestion";
 import MultChoiceQuestion from "../components/MultChoiceQuestion";
+import MultChoiceQuestionResult from "../components/MultChoiceQuestionResult";
+import TrueFalseQuestionReuslt from "../components/TrueFalseQuestionResult";
+import FillInQuestionResult from "../components/FillInQuestionResult";
 import { FcCancel, FcCheckmark } from "react-icons/fc";
 
 
@@ -13,7 +16,9 @@ export default function Quiz() {
     const [flashcards, setFlashcards] = useState([]);
     const [questions, setQuestions] = useState([]);
     const [results, setResults] = useState([]);
+    const [displaySubmit, setDisplaySubmit] = useState("block");
     const [displayResults, setDisplayResults] = useState("hidden");
+    const [wrongQuestions, setWrong] = useState([]);
 
     useEffect(() => {
         axios.post("http://localhost:8000/getFlashcards.php", {
@@ -25,7 +30,6 @@ export default function Quiz() {
                 setFlashcards(response.data);
             })
             .catch((error) => {
-                console.error("Error fetching flashcards:", error);
             });
     }, [flashcardSetId]);
 
@@ -34,10 +38,40 @@ export default function Quiz() {
         results[answer.questionNumber] = answer;
 
         setResults(results);
+        return answer;
     }
     const retakeQuiz = () => {
         window.location.reload();
     }
+    const displayWrongQuestions = () => {
+        const wrong = results.filter(result => result.answer === "incorrect");
+
+        const wrongQuestions = wrong.map(result => {
+            const question = questions.find(q => q.props.questionNumber === result.questionNumber);
+            if (typeof (question.props.terms) == "object")
+                return <MultChoiceQuestionResult
+                    terms={question.props.terms}
+                    definition={question.props.definition}
+                    answer={question.props.answer}
+                    selected={question.props.userSelected}
+
+                />;
+            else if (question.props.answer == "false" || question.props.answer == "true")
+                return <TrueFalseQuestionReuslt
+                    term={question.props.term}
+                    definition={question.props.definition}
+                    answer={question.props.answer}
+                />
+            else
+                return <FillInQuestionResult
+                    term={question.props.term}
+                    definition={question.props.definition}
+                    answer={question.props.answer}
+                />
+        });
+        setWrong(wrongQuestions);
+    };
+
 
     const scrollToResults = () => {
         const resultsElement = document.getElementById("results");
@@ -59,16 +93,7 @@ export default function Quiz() {
         return score;
 
     }
-    const getFeedback = () => {
-        return results.map((question, index) => (
-            <div className="flex flex-row ml-10 mt-1 overflow-auto">
-                <h2 className="mr-2 text-slate-800">Question {index + 1}</h2>
-                {question.answer == "correct" ? <h2 className="text-xl mt-1">{<FcCheckmark />}</h2> : <h2 className="text-xl mt-1">{<FcCancel />}</h2>}
-            </div>
 
-
-        ))
-    }
 
     const getCorrectCount = () => {
         let correct = 0;
@@ -258,7 +283,6 @@ export default function Quiz() {
                         let randTermIndex = Math.floor(Math.random() * 3);
                         let randDefinitionIndex = Math.floor(Math.random() * 3);
 
-                        console.log(randTermIndex, randDefinitionIndex)
                         let randTerm;
                         let randDef;
                         switch (randTermIndex) {
@@ -336,30 +360,41 @@ export default function Quiz() {
         <div>
             <NavBar />
             <div className="flex flex-col justify-center h-auto items-center bg-slate-100 space-y-10 p-10">
-                {questions}
-                <button className="m-10 rounded-lg bg-blue-800 pt-2 pb-2 p-10 text-white" onClick={() => { setDisplayResults("block") }}>Submit</button>
+                {questions.map((question, index) => (
+
+                    <div className="flex flex-col items-center w-screen">
+                        <div className="w-2/3 flex flex-row justify-start ml-10 mb-2">
+                            <h1 className="font-medium text-xl text-blue-800">{index + 1} / {questions.length}</h1>
+                        </div>
+                        {question}
+
+                    </div>
+
+                ))}
+                <button className={`${displaySubmit} m-10 rounded-lg bg-blue-800 pt-2 pb-2 p-10 text-white`} onClick={() => { setDisplaySubmit("hidden"); setDisplayResults("block"); displayWrongQuestions() }}>Submit</button>
             </div>
-            <div id="results" className={`h-screen bg-slate-100 ${displayResults} flex flex-col items-center `}>
-                <div className="bg-white rounded-lg shadow-lg w-2/3 h-4/5 flex flex-row justify-center">
+            <div id="results" className={`h-auto bg-slate-100 ${displayResults} flex flex-col items-center `}>
+                <div className="bg-white rounded-lg shadow-lg w-2/3 h-4/5 flex flex-row justify-center mb-10">
                     <div className="w-1/2 h-full ml-10 ">
-                        <div className="mt-10">
+                        <div className="mt-10 h-2/3 flex pb-20 items-center">
                             {getCorrectCount()}
                         </div>
-                        <div className="mt-5 ">
-                            {getFeedback()}
-                        </div>
-                        <div>
+
+                        <div >
                             <button onClick={() => retakeQuiz()} className="m-10 rounded-lg bg-blue-800 pt-2 pb-2 p-10 text-white">Retake Quiz</button>
                         </div>
                     </div>
-                    <div className="w-1/2 h-full flex justify-center items-center ">
+                    <div className="w-1/2 flex justify-center items-center">
                         {/* <h1 className="text-5xl">td</h1> */}
-                        <div className="bg-blue-500 w-60 h-60 rounded-full flex justify-center items-center">
+                        <div className="bg-blue-500 w-60 h-60 rounded-full flex justify-center items-center ">
                             <div className="bg-white w-48 h-48 rounded-full flex justify-center items-center">
                                 <h1 className="text-5xl font-semibold text-slate-800">{calculateScore()}%</h1>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className="w-2/3 space-y-10 flex flex-col items-center mb-10">
+                    {wrongQuestions}
                 </div>
             </div>
         </div >
