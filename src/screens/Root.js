@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { FaBrain } from 'react-icons/fa';
@@ -10,6 +10,11 @@ import Reviews from "../components/Reviews";
 import Description from "../components/Description";
 export default function Root() {
 
+    useEffect(() => {
+        if (localStorage.getItem("token") != null) {
+            window.location.href = "http://localhost:3000/home";
+        }
+    }, [])
     return (
         <div className="" >
             <NavBar />
