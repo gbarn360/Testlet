@@ -35,7 +35,7 @@ export default function Home() {
                 </div>
                 <div className="w-screen h-auto mt-5 2xl:mt-16">
                     <h1 className="text-lg font-bold text-slate-700 tracking-wide ml-10 2xl:text-2xl">Subjects</h1>
-                    <div className="grid grid-cols-3 justify-items-center mt-10 2xl:grid-cols-4">
+                    <div className={subjects.length == 0 ? "h-screen" : "grid grid-cols-3 justify-items-center mt-10 2xl:grid-cols-4"}>
                         {subjects.map((subject) =>
                             <Subject key={subject.id} name={subject.subjectName} id={subject.id} />
                         )}

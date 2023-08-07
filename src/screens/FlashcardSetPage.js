@@ -77,6 +77,7 @@ export default function FlashcardSetPage() {
     }
 
     const updateCardTerm = (index, term) => {
+
         flashcards[index].term = term;
 
     }

@@ -20,10 +20,10 @@ export default function FlashcardTermDef({ term, definition, displayDeleteButton
         <div className="flex flex-row justify-center w-screen">
             <div className="bg-white m-5 rounded-lg shadow-lg w-3/4  flex flex-row p-2 items-center" >
                 <div className=" p-2 w-1/6 ">
-                    <input value={updatedTerm} id="term" disabled={!readable} onChange={(e) => { setTerm(e.target.value); onTermChange(updatedTerm) }} className={`w-full text-center bg-white ${selected}`} />
+                    <input value={updatedTerm} id="term" disabled={!readable} onChange={(e) => { setTerm(e.target.value); onTermChange(e.target.value) }} className={`w-full text-center bg-white ${selected}`} />
                 </div>
                 <div className=" border-l-2 p-2 h-auto w-5/6 ">
-                    <input value={updatedDefinition} id="definition" disabled={!readable} onChange={(e) => { setDefinition(e.target.value); onDefChange(updatedDefinition) }} className={`w-full bg-white ${selected}`} />
+                    <input value={updatedDefinition} id="definition" disabled={!readable} onChange={(e) => { setDefinition(e.target.value); onDefChange(e.target.value) }} className={`w-full bg-white ${selected}`} />
                 </div>
                 <div className="mr-5 text-xl" onClick={() => { if (readable == false) { setReadable(true); setDisplayRemoveButton("block"); setSelected("border-b-2 pb-1 border-blue-800") } else { setReadable(false); setDisplayRemoveButton("hidden"); setSelected("") } }}>
                     <HiOutlinePencil />
