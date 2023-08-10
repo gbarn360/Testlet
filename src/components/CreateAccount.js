@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 export default function CreateAccount() {
-    const [dateVal, setDate] = useState("06/10/2001");
+    const [dateVal, setDate] = useState("dob"); //06/10/2001
     const [showCalendar, setShowCalendar] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
