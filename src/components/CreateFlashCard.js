@@ -88,11 +88,11 @@ export default function CreateFlashCard() {
         <div className="w-screen h-auto bg-slate-100 ">
             <NavBar />
             <div className="w-screen  flex flex-col justify-start items-center">
-                <h1 className="text-5xl font-bold text-slate-800 mt-20 m-5 2xl:text-6xl">Let's create a flashcard set</h1>
-                <h3 className="text-base text-slate-600 2xl:text-lg">Flashcards allow you to create term-definition pairs to help with studying</h3>
+                <h1 className="text-3xl md:text-5xl font-bold text-slate-800 mt-20 m-5 2xl:text-6xl">Let's create a flashcard set</h1>
+                <h3 className="text-sm md:text-base text-slate-600 2xl:text-lg">Flashcards allow you to create term-definition pairs to help with studying</h3>
             </div>
-            <div className="w-screen flex flex-row justify-center 2xl:mt-10 ">
-                <div className="flex flex-col w-1/3 m-10 space-y-5">
+            <div className="w-screen flex flex-col md:flex-row justify-center items-center 2xl:mt-10 ">
+                <div className="flex flex-col w-1/2 md:w-1/3 m-10 space-y-5">
                     <div className={subjectName == undefined ? "block" : "hidden"}>
                         <h3 className="text-sm ml-1 text-slate-800 mb-1 font-medium 2xl:text-lg 2xl:ml-40">subject</h3>
                         <input onChange={(e) => { setSubject(e.target.value) }} className=" text-sm w-full shadow-md rounded-lg p-3 2xl:w-2/3 2xl:ml-40 2xl:p-4" type="text" placeholder="add a subject name" />
