@@ -116,7 +116,7 @@ export default function FlashcardSetPage() {
                 {flashcardSet}
             </h1>
             <div className="flex flex-col items-center">
-                <div className="flex flex-row justify-between w-1/2 mt-6">
+                <div className="flex flex-row justify-between w-3/4 md:w-1/2 mt-6">
                     <AiOutlineArrowLeft className="text-2xl" onClick={() => { if (count != 0) { setCount(count - 1); setCurrentFlashcard(flashcards[count - 1]) } else setCount(count) }} />
                     <h2 className="text-center text-xl  font-medium">{count + 1} / {flashcards.length}</h2>
                     <AiOutlineArrowRight className="text-2xl" onClick={() => { if (count != flashcards.length - 1) { setCount(count + 1); setCurrentFlashcard(flashcards[count + 1]) } else setCount(count) }} />
@@ -138,12 +138,12 @@ export default function FlashcardSetPage() {
                     </div>
                 </div>
             </div>
-            <div className="flex flex-row mt-10">
-                <div className="flex flex-row justify-start ml-40 space-x-10  w-3/4">
+            <div className="flex flex-col md:flex-row mt-10 items-end">
+                <div className="flex flex-row justify-center md:justify-start md:ml-40 space-x-10  w-screen md:w-3/4">
                     <button onClick={() => { saveFlashcards() }} className="bg-blue-800 text-white pt-1 pb-1 pl-3 pr-3 rounded-md text-lg">Save</button>
                     <button onClick={() => { resetFlashcards() }} className="bg-slate-300 text-blue-800 pt-1 pb-1 pl-3 pr-3 rounded-md text-lg">revert</button>
                 </div>
-                <div className="w-1/4 ">
+                <div className="w-screen flex justify-center mt-10 md:w-1/4 ">
                     <a href="#newCard"><button onClick={() => { setDisplayAddCard(true) }} className="border-2 border-blue-800 pt-1 pb-1 pl-3 pr-3 rounded-md text-lg">add card</button></a>
                 </div>
             </div>

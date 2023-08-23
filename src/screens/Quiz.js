@@ -363,7 +363,7 @@ export default function Quiz() {
                 {questions.map((question, index) => (
 
                     <div className="flex flex-col items-center w-screen">
-                        <div className="w-2/3 flex flex-row justify-start ml-10 mb-2">
+                        <div className="w-screen md:w-2/3 flex flex-row justify-center md:justify-start md:ml-10 mb-2">
                             <h1 className="font-medium text-xl text-blue-800">{index + 1} / {questions.length}</h1>
                         </div>
                         {question}
@@ -380,20 +380,20 @@ export default function Quiz() {
                             {getCorrectCount()}
                         </div>
 
-                        <div >
+                        <div className="w-screen">
                             <button onClick={() => retakeQuiz()} className="m-10 rounded-lg bg-blue-800 pt-2 pb-2 p-10 text-white">Retake Quiz</button>
                         </div>
                     </div>
-                    <div className="w-1/2 flex justify-center items-center">
+                    <div className="w-1/2 flex justify-center items-center ">
                         {/* <h1 className="text-5xl">td</h1> */}
-                        <div className="bg-blue-500 w-60 h-60 rounded-full flex justify-center items-center ">
-                            <div className="bg-white w-48 h-48 rounded-full flex justify-center items-center">
+                        <div className="md:bg-blue-500 w-60 h-60 rounded-full flex justify-center items-center ">
+                            <div className="md:bg-white w-48 h-48 rounded-full flex justify-center items-center">
                                 <h1 className="text-5xl font-semibold text-slate-800">{calculateScore()}%</h1>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="w-2/3 space-y-10 flex flex-col items-center mb-10">
+                <div className="w-screen md:w-2/3 space-y-10 flex flex-col items-center mb-10">
                     {wrongQuestions}
                 </div>
             </div>

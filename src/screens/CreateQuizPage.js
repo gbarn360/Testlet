@@ -32,17 +32,17 @@ export default function CreateQuizPage() {
     return (
         <div className="bg-slate-100">
             <NavBar />
-            <div className="w-screen mb-10  flex flex-col justify-start items-center">
-                <h1 className="text-5xl font-bold text-slate-800 mt-20 m-5 2xl:text-6xl">Let's quiz your knowledge</h1>
+            <div className="w-screen mb-10  flex flex-col  md:justify-start items-center">
+                <h1 className="text-center text-5xl font-bold text-slate-800 mt-20 m-5 2xl:text-6xl">Let's quiz your knowledge</h1>
                 <h3 className="text-base text-slate-600 2xl:text-lg">Better prepare yourself by taking a quiz</h3>
             </div>
             <div className="w-screen h-40 border-t-2 border-slate-300 flex flex-col space-y-1 pt-5 ">
-                <h1 className="ml-20 text-2xl text-slate-700">{subjectName}</h1>
-                <h2 className="ml-20 text-2xl font-bold">Customize your quiz</h2>
+                <h1 className="ml-5 md:ml-20 text-2xl text-slate-700">{subjectName}</h1>
+                <h2 className="ml-5 md:ml-20 text-2xl font-bold">Customize your quiz</h2>
             </div>
-            <div className="flex flex-row ml-20">
+            <div className="flex flex-row ml-10 md:ml-20">
                 <div className="w-1/2 ">
-                    <div className="flex flex-row justify-between">
+                    <div className="flex flex-col md:flex-row justify-between">
                         <h2 className="font-medium text-lg">Select your flashcardSet</h2>
                         <select onChange={(e) => { setSelectedFlashcardSet(e.target.value) }} name="flashcardSets" className="w-auto mr-4 rounded-md shadow-sm p-2">
                             {flashcardSets.map((set, index) => <option  >{set.flashcardTitle}</option>)}

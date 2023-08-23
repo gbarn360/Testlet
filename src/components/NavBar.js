@@ -7,7 +7,7 @@ export default function NavBar() {
                 <h1 className=" text-3xl font-bold text-blue-700  w-screen md:w-auto text-center md:text-left" >Testlet</h1>
             </div>
             {localStorage.getItem("token") == null ? " " : <div className=" space-x-10 md:flex items-center ml-10">
-                <a href="/home">Home</a>
+                {/* <a href="/home">Home</a> */}
 
             </div>}
             {localStorage.getItem("token") === null ? <div className="hidden space-x-10 md:flex items-center  md:flex-1 md:justify-end md:mr-6">
