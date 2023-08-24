@@ -134,6 +134,7 @@ export default function FlashcardSetPage() {
                 <div className="w-screen bg-slate-100" >
                     <h1 className="text-xl font-medium ml-20 text-slate-800">Terms ( {flashcards.length} )</h1>
                     <div className="flex flex-col items-center">
+
                         {flashcards.map((item, index) => <FlashcardTermDef key={item.id} term={item.term} definition={item.def} displayDeleteButton={displayDeleteButton} onDelete={() => deleteCard(index)} onTermChange={(term) => updateCardTerm(index, term)} onDefChange={(def) => updateCardDef(index, def)} />)}
                     </div>
                 </div>
